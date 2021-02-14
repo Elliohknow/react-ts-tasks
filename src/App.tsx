@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 import { formatDateTime, UUID } from "./utils";
+
 export interface ITask {
   id: string;
   text: string;
@@ -43,8 +44,26 @@ function App() {
     const data = await result.json();
     return data;
   };
+  // Add Task
+  const addTask = async (task: ITask) => {
+    const result = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(task),
+    });
+
+    const data = await result.json();
+
+    setTasks([...tasks, data]);
+  };
+
   // Delete Task
   const deleteTask = async (id: string) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
     setTasks(tasks.filter((task) => task.id !== id));
   };
   // Archive Task
@@ -53,9 +72,22 @@ function App() {
   };
   // toggle reminder
   const toggleReminder = async (id: string) => {
+    const taskToToggle = await fetchTask(id);
+    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+    const result = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(updTask),
+    });
+
+    const data = await result.json();
+
     setTasks(
       tasks.map((task) => {
-        return task.id === id ? { ...task, reminder: !task.reminder } : task;
+        return task.id === id ? { ...task, reminder: data.reminder } : task;
       })
     );
   };
