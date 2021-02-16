@@ -5,6 +5,7 @@ export function UUID(): string {
   for (let i = 0; i < 16; i++) {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
+  console.log(result);
   return result;
 }
 export function formatDateTime(date?: Date): string {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
+import AddTask from "./components/AddTask";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
@@ -46,6 +47,8 @@ function App() {
   };
   // Add Task
   const addTask = async (task: ITask) => {
+    // const newTask = { ...task, id: UUID() };
+    // setTasks([...tasks, newTask]);
     const result = await fetch("http://localhost:5000/tasks", {
       method: "POST",
       headers: {
@@ -95,7 +98,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header
+          onAdd={() => setShowAddTask(!showAddTask)}
+          showAddTask={showAddTask}
+        />
+        {showAddTask && <AddTask onAdd={addTask} />}
         {tasks.length > 0 ? (
           <TaskList
             tasks={tasks}

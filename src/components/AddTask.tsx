@@ -9,7 +9,7 @@ const AddTask = (props: any) => {
     e.preventDefault();
 
     if (!text) {
-      alert("Please fill include the name of the task");
+      alert("Please include the name of the task");
       return;
     }
 
