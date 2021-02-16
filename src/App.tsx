@@ -4,10 +4,10 @@ import AddTask from "./components/AddTask";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
-import { formatDateTime, UUID } from "./utils";
+import { formatDateTime } from "./utils";
 
 export interface ITask {
-  id: string;
+  id: number | string;
   text: string;
   date: string;
   reminder: boolean;
@@ -17,7 +17,7 @@ function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
-      id: UUID(),
+      id: 2,
       text: "Test Task",
       date: formatDateTime(),
       reminder: true,
@@ -40,7 +40,7 @@ function App() {
     return data;
   };
   // Fetch a single task
-  const fetchTask = async (id: string) => {
+  const fetchTask = async (id: number | string) => {
     const result = await fetch(`http://localhost:5050/tasks/${id}`);
     const data = await result.json();
     return data;
@@ -49,7 +49,7 @@ function App() {
   const addTask = async (task: ITask) => {
     // const newTask = { ...task, id: UUID() };
     // setTasks([...tasks, newTask]);
-    const result = await fetch("http://localhost:5000/tasks", {
+    const result = await fetch("http://localhost:5050/tasks", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -63,22 +63,22 @@ function App() {
   };
 
   // Delete Task
-  const deleteTask = async (id: string) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, {
+  const deleteTask = async (id: number | string ) => {
+    await fetch(`http://localhost:5050/tasks/${id}`, {
       method: "DELETE",
     });
     setTasks(tasks.filter((task) => task.id !== id));
   };
   // Archive Task
-  const archiveTask = async (id: string) => {
+  const archiveTask = async (id: number | string ) => {
     console.log("task archived", id);
   };
   // toggle reminder
-  const toggleReminder = async (id: string) => {
+  const toggleReminder = async (id: number | string ) => {
     const taskToToggle = await fetchTask(id);
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
-    const result = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const result = await fetch(`http://localhost:5050/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
