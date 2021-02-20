@@ -4,7 +4,13 @@
       "id": 1,
       "text": "test",
       "date": "test date",
-      "reminder": false
+      "reminder": true
+    },
+    {
+      "text": "testing again",
+      "date": "today",
+      "reminder": false,
+      "id": 2
     }
   ]
 }

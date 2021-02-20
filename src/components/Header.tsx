@@ -7,11 +7,7 @@ interface Props {
   title?: string;
 }
 
-const Header: React.FC<Props> = ({
-  title = "Some Tasks",
-  onAdd,
-  showAddTask,
-}) => {
+const Header: React.FC<Props> = ({ title, onAdd, showAddTask }) => {
   const location = useLocation();
   // const onClick = () => {
   //   console.log("Button Clicked!");
@@ -19,7 +15,7 @@ const Header: React.FC<Props> = ({
 
   return (
     <header className="header">
-      <h1>{title}</h1>
+      <h1>{title ?? "Some Tasks"}</h1>
       {location.pathname === "/" && (
         <Button
           color={showAddTask ? "red" : "green"}
