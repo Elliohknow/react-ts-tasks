@@ -1,11 +1,14 @@
 import { useState } from "react";
 
-const AddTask = (props: any) => {
+interface Props {
+  onAdd: (task: any) => Promise<void>;
+}
+const AddTask: React.FC<Props> = ({ onAdd }) => {
   const [text, setText] = useState("");
   const [date, setDate] = useState("");
   const [reminder, setReminder] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (!text) {
@@ -13,7 +16,7 @@ const AddTask = (props: any) => {
       return;
     }
 
-    props.onAdd({ text, date, reminder });
+    onAdd({ text, date, reminder });
 
     setText("");
     setDate("");

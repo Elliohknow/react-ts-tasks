@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import About from "./components/About";
 import AddTask from "./components/AddTask";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -34,19 +35,19 @@ function App() {
   }, []);
 
   // Fetch all tasks
-  const fetchTasks = async () => {
+  const fetchTasks = async (): Promise<any> => {
     const result = await fetch("http://localhost:5050/tasks");
     const data = await result.json();
     return data;
   };
   // Fetch a single task
-  const fetchTask = async (id: number | string) => {
+  const fetchTask = async (id: number | string): Promise<any> => {
     const result = await fetch(`http://localhost:5050/tasks/${id}`);
     const data = await result.json();
     return data;
   };
   // Add Task
-  const addTask = async (task: ITask) => {
+  const addTask = async (task: ITask): Promise<void> => {
     // const newTask = { ...task, id: UUID() };
     // setTasks([...tasks, newTask]);
     const result = await fetch("http://localhost:5050/tasks", {
@@ -63,18 +64,18 @@ function App() {
   };
 
   // Delete Task
-  const deleteTask = async (id: number | string ) => {
+  const deleteTask = async (id: number | string): Promise<void> => {
     await fetch(`http://localhost:5050/tasks/${id}`, {
       method: "DELETE",
     });
     setTasks(tasks.filter((task) => task.id !== id));
   };
   // Archive Task
-  const archiveTask = async (id: number | string ) => {
+  const archiveTask = async (id: number | string): Promise<void> => {
     console.log("task archived", id);
   };
   // toggle reminder
-  const toggleReminder = async (id: number | string ) => {
+  const toggleReminder = async (id: number | string): Promise<void> => {
     const taskToToggle = await fetchTask(id);
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
 
@@ -102,17 +103,26 @@ function App() {
           onAdd={() => setShowAddTask(!showAddTask)}
           showAddTask={showAddTask}
         />
-        {showAddTask && <AddTask onAdd={addTask} />}
-        {tasks.length > 0 ? (
-          <TaskList
-            tasks={tasks}
-            onDelete={deleteTask}
-            onArchive={archiveTask}
-            onToggle={toggleReminder}
-          />
-        ) : (
-          "Task list is currently empty."
-        )}
+        <Route
+          path="/"
+          exact
+          render={(props) => (
+            <>
+              {showAddTask && <AddTask onAdd={addTask} />}
+              {tasks.length > 0 ? (
+                <TaskList
+                  tasks={tasks}
+                  onDelete={deleteTask}
+                  onArchive={archiveTask}
+                  onToggle={toggleReminder}
+                />
+              ) : (
+                "Task list is currently empty."
+              )}
+            </>
+          )}
+        />
+        <Route path="/about" component={About} />
         <Footer />
       </div>
     </Router>

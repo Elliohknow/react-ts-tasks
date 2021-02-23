@@ -12,7 +12,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: radial-gradient(circle 5px at top left, rgba(226, 226, 226,0.1) 0%, rgba(226, 226, 226,0.1) 50%,rgba(201, 201, 201,0.1) 50%, rgba(201, 201, 201,0.1) 30%,transparent 30%, transparent 50%),linear-gradient(90deg, rgb(51,51,51),rgb(51,51,51)); background-size: 11px 11px;
+  background-image: radial-gradient(
+      circle 5px at top left,
+      rgba(226, 226, 226, 0.1) 0%,
+      rgba(226, 226, 226, 0.1) 50%,
+      rgba(201, 201, 201, 0.1) 50%,
+      rgba(201, 201, 201, 0.1) 30%,
+      transparent 30%,
+      transparent 50%
+    ),
+    linear-gradient(90deg, rgb(51, 51, 51), rgb(51, 51, 51));
+  background-size: 11px 11px;
 }
 
 .App {
@@ -36,17 +46,25 @@ body {
 .btn {
   display: inline-block;
   background: #000;
-  color: #fff;
+  color: #e9e9e9;
   border: none;
   padding: 10px 20px;
   margin: 5px;
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
 }
 
+.trash {
+  color: orangered;
+}
+.archive {
+  color: rgb(201, 165, 67);
+  border-color: #000;
+  border-width: 1px;
+}
 .btn:focus {
   outline: none;
 }
@@ -60,14 +78,26 @@ body {
   width: 100%;
 }
 
+.icon {
+  margin-left: 1em;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.icon:hover {
+  opacity: 1;
+}
+
 .task {
-  background-color: #bdbbb0;
+  background-color: #e0dfd5da;
   /* background-color: #fff; */
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
 }
-
+.task:hover {
+  background-color: #e0dfd5;
+}
 .task.reminder {
   border-left: 5px solid green;
 }
@@ -76,6 +106,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.task h3 .icons {
+  justify-content: space-evenly;
 }
 
 .add-form {

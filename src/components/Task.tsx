@@ -1,5 +1,6 @@
 import { FaArchive, FaTrashAlt } from "react-icons/fa";
 import { ITask } from "../App";
+import IconWrapper from "./IconWrapper";
 
 interface Props {
   task: ITask;
@@ -8,8 +9,7 @@ interface Props {
   onToggle: (id: any) => Promise<void>;
 }
 
-const Task = (props: Props) => {
-  const { task, onDelete, onArchive, onToggle } = props;
+const Task: React.FC<Props> = ({ task, onDelete, onArchive, onToggle }) => {
   return (
     <div
       className={`task ${task.reminder && "reminder"}`}
@@ -17,14 +17,18 @@ const Task = (props: Props) => {
     >
       <h3>
         {task.text}{" "}
-        <FaArchive
-          style={{ color: "yellow", cursor: "pointer" }}
-          onClick={() => onArchive(task.id)}
-        />
-        <FaTrashAlt
-          style={{ color: "red", cursor: "pointer" }}
-          onClick={() => onDelete(task.id)}
-        />
+        <div className="icons">
+          <IconWrapper
+            children={<FaArchive />}
+            className="icon archive"
+            onClick={() => onArchive(task.id)}
+          />
+          <IconWrapper
+            children={<FaTrashAlt />}
+            className="icon trash"
+            onClick={() => onDelete(task.id)}
+          />
+        </div>
       </h3>
       <p>{task.date}</p>
     </div>

@@ -9,8 +9,16 @@
     {
       "text": "testing again",
       "date": "today",
-      "reminder": false,
+      "reminder": true,
       "id": 2
+    }
+  ],
+  "archived": [
+    {
+      "text": "test archive feat",
+      "date": "today",
+      "reminder": true,
+      "id": 56
     }
   ]
 }
