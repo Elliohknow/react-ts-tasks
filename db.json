@@ -1,24 +1,28 @@
 {
   "tasks": [
     {
-      "id": 1,
       "text": "test",
-      "date": "test date",
-      "reminder": true
+      "date": "today",
+      "reminder": true,
+      "id": 1
     },
     {
-      "text": "testing again",
+      "text": "test again",
       "date": "today",
       "reminder": true,
       "id": 2
-    }
-  ],
-  "archived": [
+    },
     {
-      "text": "test archive feat",
-      "date": "today",
+      "text": "get that bread",
+      "date": "Everyday",
       "reminder": true,
-      "id": 56
+      "id": 3
+    },
+    {
+      "text": "do a sweet flip",
+      "date": "on Flipday @ flip o'clock",
+      "reminder": false,
+      "id": 4
     }
   ]
 }

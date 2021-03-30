@@ -60,11 +60,11 @@ body {
 .trash {
   color: orangered;
 }
-.archive {
+/* .archive {
   color: rgb(201, 165, 67);
   border-color: #000;
   border-width: 1px;
-}
+} */
 .btn:focus {
   outline: none;
 }

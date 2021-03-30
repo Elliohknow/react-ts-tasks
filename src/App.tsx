@@ -14,7 +14,7 @@ export interface ITask {
   reminder: boolean;
 }
 
-function App() {
+export default function App() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     {
@@ -62,17 +62,12 @@ function App() {
 
     setTasks([...tasks, data]);
   };
-
   // Delete Task
   const deleteTask = async (id: number | string): Promise<void> => {
     await fetch(`http://localhost:5050/tasks/${id}`, {
       method: "DELETE",
     });
     setTasks(tasks.filter((task) => task.id !== id));
-  };
-  // Archive Task
-  const archiveTask = async (id: number | string): Promise<void> => {
-    console.log("task archived", id);
   };
   // toggle reminder
   const toggleReminder = async (id: number | string): Promise<void> => {
@@ -113,7 +108,6 @@ function App() {
                 <TaskList
                   tasks={tasks}
                   onDelete={deleteTask}
-                  onArchive={archiveTask}
                   onToggle={toggleReminder}
                 />
               ) : (
@@ -128,5 +122,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

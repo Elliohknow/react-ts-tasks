@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   return (
-    <div>
-      <Link to="/">Back</Link>
-    </div>
+    <section className="about">
+      <p>
+        This is a task-tracker client demo app built with React and TypeScript.{" "}
+        <Link to="/">Go Back</Link>
+      </p>
+    </section>
   );
 }

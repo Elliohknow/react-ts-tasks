@@ -9,9 +9,6 @@ interface Props {
 
 const Header: React.FC<Props> = ({ title, onAdd, showAddTask }) => {
   const location = useLocation();
-  // const onClick = () => {
-  //   console.log("Button Clicked!");
-  // };
 
   return (
     <header className="header">

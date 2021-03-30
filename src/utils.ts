@@ -9,7 +9,7 @@ export function UUID(): string {
   return result;
 }
 export function formatDateTime(date?: Date): string {
-  const rightNow = date ?? new Date(Date.now());
+  const rightNow = date ?? new Date();
   return rightNow.toLocaleString([], {
     weekday: "short",
     month: "numeric",
